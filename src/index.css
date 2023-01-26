@@ -2,9 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-.slow-transition{
-  @apply transition-all duration-300
+
+@layer components{
+    .slow-transition{
+      @apply transition-all duration-300
+    }
+    
+    .sidebar-sm-screen{
+      @apply w-10/12 justify-start p-3 py-10 items-start absolute z-10;
+    }
+    
+    .sidebar-lg-screen{
+      @apply md:w-3/12  md:p-5 md:justify-center md:items-start md:relative;
+    }
 }
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

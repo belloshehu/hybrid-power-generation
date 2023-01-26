@@ -1,16 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
 import Sidebar from './components/Sidebar/Sidebar';
+import Main from './components/Main/Main';
 import { Route, Routes } from 'react-router-dom';
+import Home from './pages/Home/Home';
 
 function App() {
   return (
-    <div className="App">
+    <div className="flex w-screen relative">
       <Sidebar />
-      <Routes>
-        <Route path='/' element={<h2 className='text-red text-4xl'>Home</h2>}/>
-        <Route path='*' element={<h2>Page not found!</h2>}/>
-      </Routes>
+      <Main>
+        <Routes>
+          <Route path='/' element={<Home />}/>
+          <Route path='*' element={<h2>Page not found!</h2>}/>
+        </Routes>
+      </Main>
     </div>
   );
 }
