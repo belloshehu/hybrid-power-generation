@@ -5,6 +5,7 @@ import {GiPowerGenerator, GiElectric} from 'react-icons/gi'
 import {ImPower} from 'react-icons/im'
 import {TbDevices} from 'react-icons/tb'
 import NavItem from '../NavItem/NavItem'
+import ConsumptionWindowControl from '../ConsumptionWindowControl/ConsumptionWindowControl'
 
 const navItems = [
     {
@@ -54,10 +55,11 @@ const Sidebar = () => {
             </div>
 
             <ul 
-                className='list-none p-0 m-0 flex flex-col gap-2 flex-3 justify-center w-full'
+                className='list-none p-0 m-0 my-2 flex flex-col gap-2 flex-3 justify-center w-full'
             >
                 {navItems.map(item => <NavItem {...item} key={item.text} /> )}
             </ul>
+            <ConsumptionWindowControl />
         </aside>
     )
 }

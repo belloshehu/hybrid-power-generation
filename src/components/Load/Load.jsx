@@ -3,11 +3,11 @@
 import React from 'react'
 import { FaLightbulb } from 'react-icons/fa'
 import { disconnect, connect } from '../../features/load/loadSlice'
-import { calculateConnectedTotalLoad } from '../../features/load/loadSlice'
+import { calculateConnectedTotalLoad, updateLoadsConsumption } from '../../features/load/loadSlice'
 import { useDispatch } from 'react-redux'
 
 
-const Load = ({id, name, category, capacity, isConnected}) => {
+const Load = ({id, name, category, capacity,consumption, isConnected}) => {
     const dispatch = useDispatch()
 
     const handleDisconnect = () =>{
@@ -18,6 +18,7 @@ const Load = ({id, name, category, capacity, isConnected}) => {
     const handleConnect = () =>{
         dispatch(calculateConnectedTotalLoad())
         dispatch(connect({id}))
+        dispatch(updateLoadsConsumption())
     }
     
     return (
@@ -27,10 +28,10 @@ const Load = ({id, name, category, capacity, isConnected}) => {
             <div 
                 className='flex justify-between items-center'
             >
-                <h3 className='text-subtitle text-primary'>{name} load</h3>
+                <h3 className='text-subtitle text-primary'>{name} load ({capacity})MW</h3>
             </div>
             <div className='text-center bg-slate-200 flex justify-center gap-2 items-center'>
-                <h4>{capacity} MW</h4>
+                <h4>{consumption} kwh</h4>
                 <FaLightbulb 
                     className={
                         `${isConnected? 'text-secondary': 'text-black'} 

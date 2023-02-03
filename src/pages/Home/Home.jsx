@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import HydroSource from '../../components/HydroSource/HydroSource'
 import LoadItems from '../../components/LoadItems/LoadItems'
 import SolarSource from '../../components/SolarSource/SolarSource'
-import { Selector } from '@reduxjs/toolkit'
+import { FaClock } from 'react-icons/fa'
 import { 
   calculateConnectedTotalLoad, 
   calculateTotalLoad 
@@ -17,7 +17,7 @@ const Home = () => {
   const hydroSource = useSelector(store => store.hydroSource)
   const solarSource = useSelector(store => store.solarSource)
 
-  const {totalConnectedLoad, totalLoad} = useSelector(store => store.load)
+  const {totalConnectedLoad, totalLoad, consumptionWindow} = useSelector(store => store.load)
   const dispatch = useDispatch()
 
   const calculateTotalConnectedPower = () =>{
@@ -55,9 +55,13 @@ const Home = () => {
       </section>
 
       <section className=''>
-        <div className='bg-primary p-1 my-2 flex gap-2 items-center rounded-md justify-center'>
+        <div className='bg-primary p-1 my-2 flex flex-wrap gap-2 items-center rounded-md justify-center'>
           <span className='text-slate-900 border-r-2 border-secondary pr-2'>Total available: {totalLoad} MW</span>
-          <span className='text-slate-100'>Total connected: {totalConnectedLoad} MW</span>
+          <span className='text-slate-100 border-r-2 border-secondary pr-2'>Total connected: {totalConnectedLoad} MW</span>
+          <div className='flex gap-3 items-center'>
+            <FaClock className='text-xl text-white'/>
+            <p>{consumptionWindow.time.from} - {consumptionWindow.time.to}</p>
+        </div>
         </div>
         <LoadItems />
       </section>

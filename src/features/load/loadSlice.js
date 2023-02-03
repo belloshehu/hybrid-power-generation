@@ -34,28 +34,32 @@ const loadSlice = createSlice({
         totalLoad: 0,
         totalConnectedLoad: 0,
         consumptionIndex: 0,
-        consumptionWindow: null
+        consumptionWindow: consumption.values[0]
     }, 
     reducers: {
         updateLoadsConsumption: (state) =>{
             state.loadItems = state.loadItems.map(item =>{
-                return {...item, consumption: state.consumptionWindow[item.name]}
+                return {...item, consumption: state.consumptionWindow.power[item.name]}
             })
         },
         getNextConsumptionWindow: (state) => {
-            if(state.consumptionIndex < consumption.length){
-                state.consumptionIndex +=1
+            if(state.consumptionIndex < consumption.values.length -1){
+                state.consumptionIndex++
             }else{
                 state.consumptionIndex = 0
             }
+            console.log(state.consumptionIndex)
             state.consumptionWindow = consumption.values[state.consumptionIndex]
+            updateLoadsConsumption()
         },
         getPreviousConsumptionWindow: (state) => {
-            if(state.consumptionIndex > consumption.length){
-                state.consumptionIndex -=1
+            if(state.consumptionIndex > 0){
+                state.consumptionIndex--
             }else{
-                state.consumptionIndex = consumption.length - 1
+                state.consumptionIndex = consumption.values.length - 1
             }
+            console.log(state.consumptionIndex)
+
             state.consumptionWindow = consumption.values[state.consumptionIndex]
         },
         calculateTotalLoad: (state) => {
@@ -95,5 +99,13 @@ const loadSlice = createSlice({
     }
 })
 
-export const {disconnect, connect, calculateConnectedTotalLoad, calculateTotalLoad} = loadSlice.actions
+export const {
+    disconnect, 
+    connect, 
+    calculateConnectedTotalLoad, 
+    calculateTotalLoad,
+    updateLoadsConsumption,
+    getNextConsumptionWindow,
+    getPreviousConsumptionWindow,
+} = loadSlice.actions
 export default loadSlice.reducer
