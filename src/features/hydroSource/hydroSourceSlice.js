@@ -3,16 +3,16 @@ import { createSlice } from "@reduxjs/toolkit";
 const hydroSourceSlice = createSlice({
     name: 'hydroSource',
     initialState: {
-        crossSectionalArea: 10,
-        head: 100,
-        waterSpeed: 10,
+        crossSectionalArea: 200,
+        head: 80,
+        waterSpeed: 100,
         flowVolume: 0,
         powerGenerated: 0,
         isRunning: false,
     },
     reducers: {
         calculateFlowVolume: (state) => {
-            state.flowVolume = state.crossSectionalArea * state.waterSpeed
+            state.flowVolume = state.crossSectionalArea * state.waterSpeed / 1000000;
         },
         calculatePower: (state) => {
             state.powerGenerated = state.head * state.flowVolume * 5; 

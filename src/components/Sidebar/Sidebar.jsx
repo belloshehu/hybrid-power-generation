@@ -12,11 +12,6 @@ const navItems = [
         icon: <FaHome />,
         path: '/',
     },
-    // {
-    //     text: 'Plant',
-    //     icon: <GiPowerGenerator />,
-    //     path: '/plant'
-    // },
     {
         text: 'Sources',
         icon: <ImPower />,
@@ -44,7 +39,7 @@ const Sidebar = () => {
 
     return (
         <aside 
-            className='bg-primary h-screen flex flex-col sidebar-sm-screen sidebar-lg-screen'
+            className={`bg-primary h-screen flex flex-col sidebar-sm-screen sidebar-lg-screen`}
         >
             <FaTimes  
                 className='md:hidden text-3xl absolute right-2 top-2 text-secondary bg-slate-500 rounded-full'   

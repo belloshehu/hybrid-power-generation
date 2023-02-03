@@ -1,12 +1,66 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import HydroSource from '../../components/HydroSource/HydroSource'
+import LoadItems from '../../components/LoadItems/LoadItems'
 import SolarSource from '../../components/SolarSource/SolarSource'
+import { Selector } from '@reduxjs/toolkit'
+import { 
+  calculateConnectedTotalLoad, 
+  calculateTotalLoad 
+} from '../../features/load/loadSlice'
+
 
 const Home = () => {
+  const [totalGeneratedPower, setTotalGeneratedPower] = useState(0)
+  const [totalConnectedPower, setTotalConnectedPower] =  useState(0)
+
+  const hydroSource = useSelector(store => store.hydroSource)
+  const solarSource = useSelector(store => store.solarSource)
+
+  const {totalConnectedLoad, totalLoad} = useSelector(store => store.load)
+  const dispatch = useDispatch()
+
+  const calculateTotalConnectedPower = () =>{
+    let total = 0
+    total += solarSource.isRunning? solarSource.powerGenerated : 0
+    total += hydroSource.isRunning? hydroSource.powerGenerated : 0
+    total = total.toFixed(2)
+    setTotalConnectedPower(total)
+  }
+
+  useEffect(() => {
+    dispatch(calculateTotalLoad())
+    dispatch(calculateConnectedTotalLoad())
+  }, [])
+  
+  useEffect(()=>{
+    let total = hydroSource.powerGenerated + solarSource.powerGenerated
+    setTotalGeneratedPower(total)
+  }, [])
+
+  useEffect(()=>{
+    calculateTotalConnectedPower()
+  }, [solarSource.isRunning, hydroSource.isRunning])
   return (
-    <section className='grid grid-cols-1 md:grid-cols-2 gap-2 w-full'>
-      <HydroSource />
-      <SolarSource />
+    <section className='w-full flex flex-col gap-10'>
+      <section>
+        <div className='bg-primary p-1 my-2 flex gap-2 items-center rounded-md justify-center'>
+          <span className='text-slate-900 border-r-2 border-secondary pr-2'>Total available: {totalGeneratedPower} MW</span>
+          <span className='text-slate-100'>Total Connected: {totalConnectedPower} MW</span>
+        </div>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-2 w-full'>
+          <HydroSource />
+          <SolarSource />
+        </div>
+      </section>
+
+      <section className=''>
+        <div className='bg-primary p-1 my-2 flex gap-2 items-center rounded-md justify-center'>
+          <span className='text-slate-900 border-r-2 border-secondary pr-2'>Total available: {totalLoad} MW</span>
+          <span className='text-slate-100'>Total connected: {totalConnectedLoad} MW</span>
+        </div>
+        <LoadItems />
+      </section>
     </section>
   )
 }

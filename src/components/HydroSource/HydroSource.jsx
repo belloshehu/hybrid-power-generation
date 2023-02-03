@@ -22,16 +22,24 @@ const HydroSource = () => {
     }, [])
     
     return (
-        <article className='bg-white p-5 rounded-md shadow-md shadow-slate-500 text-black'>
-            <div className='flex justify-between items-center '>
+        <article 
+            className='bg-white p-5 rounded-md shadow-md shadow-slate-500 text-black hover:scale-105 slow-transition'
+        >
+            <div 
+                className='flex justify-between items-center'
+            >
                 <h3 className='text-subtitle text-primary'>Hydro source</h3>
                 <TbSettings className={`text-3xl ${isRunning? 'animate-spin': ''}`}/>
             </div>
             <div className='text-center bg-slate-200 flex justify-center gap-2'>
                 <h4>{powerGenerated} MW</h4>
-                <FiEdit className='text-primary font-extrabold text-3xl hover:bg-slate-400 rounded-full p-1'/>
+                <FiEdit 
+                    className='text-primary font-extrabold text-3xl hover:bg-slate-400 rounded-full p-1'
+                />
             </div>
-            <div className='grid grid-cols-2 bg-slate-200 gap-2 p-1 text-center text-primary'>
+            <div 
+                className='grid grid-cols-2 bg-slate-200 gap-2 p-1 text-center text-primary'
+            >
                 <div className='p-1 bg-slate-400'>
                     {head}m head
                 </div>

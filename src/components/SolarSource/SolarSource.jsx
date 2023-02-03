@@ -19,7 +19,7 @@ const SolarSource = () => {
         
     return (
         <article 
-            className='bg-white p-5 rounded-md shadow-md shadow-slate-500 text-black'
+            className='bg-white p-5 rounded-md shadow-md shadow-slate-500 text-black hover:scale-105 slow-transition'
         >
             <div 
                 className='flex justify-between items-center'
