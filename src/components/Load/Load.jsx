@@ -1,15 +1,16 @@
-
-
-import React from 'react'
+import React, {useEffect} from 'react'
 import { FaLightbulb } from 'react-icons/fa'
 import { disconnect, connect } from '../../features/load/loadSlice'
-import { calculateConnectedTotalLoad, updateLoadsConsumption } from '../../features/load/loadSlice'
-import { useDispatch } from 'react-redux'
-
+import { 
+    calculateConnectedTotalLoad, 
+    updateLoadsConsumption,
+} from '../../features/load/loadSlice'
+import { useDispatch, useSelector } from 'react-redux'
+let count = 0
 
 const Load = ({id, name, category, capacity,consumption, isConnected}) => {
     const dispatch = useDispatch()
-
+    const {consumptionWindow} = useSelector(store => store.load)
     const handleDisconnect = () =>{
         dispatch(calculateConnectedTotalLoad())
         dispatch(disconnect({id}))
@@ -20,7 +21,7 @@ const Load = ({id, name, category, capacity,consumption, isConnected}) => {
         dispatch(connect({id}))
         dispatch(updateLoadsConsumption())
     }
-    
+      
     return (
         <article 
         className='bg-white p-5 rounded-md shadow-md shadow-slate-500 text-black hover:scale-105 slow-transition'

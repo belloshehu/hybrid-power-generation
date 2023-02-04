@@ -34,13 +34,17 @@ const loadSlice = createSlice({
         totalLoad: 0,
         totalConnectedLoad: 0,
         consumptionIndex: 0,
-        consumptionWindow: consumption.values[0]
+        consumptionWindow: consumption.values[0],
+        timeSlot:'01:00-02:00',
     }, 
     reducers: {
         updateLoadsConsumption: (state) =>{
             state.loadItems = state.loadItems.map(item =>{
                 return {...item, consumption: state.consumptionWindow.power[item.name]}
             })
+        },
+        updateConsumptionWindow: (state, action) => {
+            state.consumptionWindow = consumption.values.find(value => value.time.from === action.payload)
         },
         getNextConsumptionWindow: (state) => {
             if(state.consumptionIndex < consumption.values.length -1){
@@ -107,5 +111,6 @@ export const {
     updateLoadsConsumption,
     getNextConsumptionWindow,
     getPreviousConsumptionWindow,
+    updateConsumptionWindow,
 } = loadSlice.actions
 export default loadSlice.reducer

@@ -60,7 +60,6 @@ const Sidebar = () => {
             >
                 {navItems.map(item => <NavItem {...item} key={item.text} /> )}
             </ul>
-            <LineChart />
             <ConsumptionWindowControl />
         </aside>
     )
