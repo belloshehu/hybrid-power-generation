@@ -8,6 +8,7 @@ import {
   calculateConnectedTotalLoad, 
   calculateTotalLoad 
 } from '../../features/load/loadSlice'
+import LineChart from '../../components/LineChart/LineChart'
 
 
 const Home = () => {

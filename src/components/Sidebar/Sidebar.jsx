@@ -6,6 +6,7 @@ import {ImPower} from 'react-icons/im'
 import {TbDevices} from 'react-icons/tb'
 import NavItem from '../NavItem/NavItem'
 import ConsumptionWindowControl from '../ConsumptionWindowControl/ConsumptionWindowControl'
+import LineChart from '../LineChart/LineChart'
 
 const navItems = [
     {
@@ -59,6 +60,7 @@ const Sidebar = () => {
             >
                 {navItems.map(item => <NavItem {...item} key={item.text} /> )}
             </ul>
+            <LineChart />
             <ConsumptionWindowControl />
         </aside>
     )

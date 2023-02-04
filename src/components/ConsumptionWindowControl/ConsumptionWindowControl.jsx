@@ -24,7 +24,7 @@ const ConsumptionWindowControl = () => {
 
   return (
     <section className='bg-slate-300 text-black pb-2 my-2 flex flex-col gap-4 items-center rounded-md justify-center w-full'>
-        <h3 className='font-bold bg-slate-100 w-full text-center rounded-t-md'>Consumption window control</h3>
+        <h3 className='font-bold bg-slate-100 w-full text-center rounded-t-md'>Consumption window</h3>
         <div className='flex gap-3 items-center'>
             <FaClock className='text-xl text-primary'/>
             <p>{consumptionWindow.time.from} - {consumptionWindow.time.to}</p>
