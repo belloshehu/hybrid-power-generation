@@ -69,7 +69,7 @@ const loadSlice = createSlice({
         calculateTotalLoad: (state) => {
             let total = 0
             state.loadItems.forEach(item => {
-                total += item.capacity
+                total += item.consumption
             });
             state.totalLoad = total
         },
@@ -77,7 +77,7 @@ const loadSlice = createSlice({
             let total = 0
             state.loadItems.forEach(item => {
                 if(item.isConnected === true){
-                    total += item.capacity
+                    total += item.consumption
                 }
             });
             state.totalConnectedLoad = total

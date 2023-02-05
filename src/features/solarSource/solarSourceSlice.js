@@ -6,14 +6,18 @@ const solarSlice = createSlice({
         panelNumber: 1000,
         powerGenerated: 0,
         isRunning: false,
-        irradiance: 5.5, 
+        irradiance: 0, 
         panelWattage: 300,
         batteryCapacity: 0,
         batteryNumber: 0,
     },
     reducers: {
-        calculatePower: (state) => {
-            state.powerGenerated = state.panelWattage * state.irradiance * state.panelNumber /1000000; 
+        calculatePower: (state, action) => {
+            if(action.payload){
+                state.powerGenerated = state.panelWattage * action.payload * state.panelNumber * 0.75 / 1000000; 
+            }else{
+                state.powerGenerated = state.panelWattage * state.irradiance * state.panelNumber * 0.75 / 1000000; 
+            }
         }, 
         start: (state) => {
             state.isRunning = true

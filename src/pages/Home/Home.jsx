@@ -32,7 +32,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(calculateTotalLoad())
     dispatch(calculateConnectedTotalLoad())
-  }, [])
+  }, [consumptionWindow])
   
   useEffect(()=>{
     let total = hydroSource.powerGenerated + solarSource.powerGenerated
@@ -42,12 +42,23 @@ const Home = () => {
   useEffect(()=>{
     calculateTotalConnectedPower()
   }, [solarSource.isRunning, hydroSource.isRunning])
+
   return (
     <section className='w-full flex flex-col gap-10'>
       <section>
-        <div className='bg-primary p-1 my-2 flex gap-2 items-center rounded-md justify-center'>
-          <span className='text-slate-900 border-r-2 border-secondary pr-2'>Total available: {totalGeneratedPower} MW</span>
-          <span className='text-slate-100'>Total Connected: {totalConnectedPower} MW</span>
+        <div 
+          className='bg-primary p-1 my-2 flex gap-2 items-center rounded-md justify-center'
+        >
+          <span 
+            className='text-slate-900 border-r-2 border-secondary pr-2'
+          >
+            Total available: {totalGeneratedPower} MW
+          </span>
+          <span 
+            className='text-slate-100'
+          >
+            Total Connected: {totalConnectedPower} MW
+          </span>
         </div>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-2 w-full'>
           <HydroSource />
@@ -56,9 +67,19 @@ const Home = () => {
       </section>
 
       <section className=''>
-        <div className='bg-primary p-1 my-2 flex flex-wrap gap-2 items-center rounded-md justify-center'>
-          <span className='text-slate-900 border-r-2 border-secondary pr-2'>Total available: {totalLoad} MW</span>
-          <span className='text-slate-100 border-r-2 border-secondary pr-2'>Total connected: {totalConnectedLoad} MW</span>
+        <div 
+          className='bg-primary p-1 my-2 flex flex-wrap gap-2 items-center rounded-md justify-center'
+        >
+          <span 
+            className='text-slate-900 border-r-2 border-secondary pr-2'
+          >
+            Total available: {(totalLoad / 1000).toFixed(2) } MW
+          </span>
+          <span 
+            className='text-slate-100 border-r-2 border-secondary pr-2'
+              >
+                Total connected: {(totalConnectedLoad / 1000).toFixed(2)} MW
+          </span>
           <div className='flex gap-3 items-center'>
             <FaClock className='text-xl text-white'/>
             <p>{consumptionWindow.time.from} - {consumptionWindow.time.to}</p>

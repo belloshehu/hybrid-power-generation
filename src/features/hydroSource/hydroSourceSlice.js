@@ -6,13 +6,15 @@ const hydroSourceSlice = createSlice({
         crossSectionalArea: 200,
         head: 16,
         waterSpeed: 100,
-        flowVolume: 0,
-        powerGenerated: 0,
+        flowVolume: 25000,
+        powerGenerated: 2000000,
         isRunning: false,
     },
     reducers: {
         calculateFlowVolume: (state) => {
-            state.flowVolume = state.crossSectionalArea * state.waterSpeed;
+            if(state.powerGenerated === 0){
+                state.flowVolume = state.crossSectionalArea * state.waterSpeed;
+            }
         },
         calculatePower: (state) => {
             state.powerGenerated = state.head * state.flowVolume * 5 / 1000000; 

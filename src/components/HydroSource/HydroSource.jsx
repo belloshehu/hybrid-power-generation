@@ -44,7 +44,7 @@ const HydroSource = () => {
                     {head}m head
                 </div>
                 <div className='p-1 bg-slate-400'>
-                    {flowVolume}m<sup>3</sup>/s flow volume
+                    {flowVolume}ls<sup>-1</sup> flow volume
                 </div>
             </div>
             {

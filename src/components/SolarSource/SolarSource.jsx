@@ -13,8 +13,15 @@ const SolarSource = () => {
         panelNumber
     } = useSelector(store => store.solarSource)
 
+    const fetchData = async () =>{
+        const res =  await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${'5.95058'}&lon=${'5.681'}&appid=${'8825d3ca67709456f37a2234758c2c66'}`)
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(err => {console.log(err)})
+    }
     useEffect(() => {
-        dispatch(calculatePower())
+        fetchData()
+        dispatch(calculatePower(2.4))
     }, [])
         
     return (

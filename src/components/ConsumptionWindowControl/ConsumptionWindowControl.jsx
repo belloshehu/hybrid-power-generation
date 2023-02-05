@@ -8,6 +8,7 @@ import {
     updateConsumptionWindow 
 } from '../../features/load/loadSlice'
 import { setMode } from '../../features/controlPanel/controlPanelSlice'
+import { formatHour } from '../../utils/utils'
 
 let count = 0
 const ConsumptionWindowControl = () => {
@@ -37,24 +38,24 @@ const ConsumptionWindowControl = () => {
         let timer = null
         if (mode === 'fast'){
             timer = setInterval(() => {
-              if (count < 10){
-                  dispatch(updateConsumptionWindow(`0${count}:00`))
-              }else{
-                  dispatch(updateConsumptionWindow(`${count}:00`))
-              }
-              dispatch(updateLoadsConsumption())
-              if(count >= 23){
-                  count = 0
-              }else{
-                  count++
-              }
+                dispatch(updateConsumptionWindow(formatHour(count)))
+                dispatch(updateLoadsConsumption())
+
+                if(count >= 23){
+                    count = 0
+                }else{
+                    count++
+                }
             }, 2000)
+        }else{
+            let hours = new Date().getHours()
+            dispatch(updateConsumptionWindow(formatHour(hours)))
+            dispatch(updateLoadsConsumption())
         }
-  
         return ()=>{
           clearInterval(timer)
         }
-      }, [consumptionWindow, mode])
+      }, [mode])
     
     
     return (

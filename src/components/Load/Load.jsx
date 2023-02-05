@@ -22,6 +22,9 @@ const Load = ({id, name, category, capacity,consumption, isConnected}) => {
         dispatch(updateLoadsConsumption())
     }
       
+    useEffect(()=>{
+
+    }, [consumptionWindow])
     return (
         <article 
         className='bg-white p-5 rounded-md shadow-md shadow-slate-500 text-black hover:scale-105 slow-transition'
@@ -29,7 +32,7 @@ const Load = ({id, name, category, capacity,consumption, isConnected}) => {
             <div 
                 className='flex justify-between items-center'
             >
-                <h3 className='text-subtitle text-primary'>{name} load ({capacity})MW</h3>
+                <h3 className='text-subtitle text-primary'>{name} load</h3>
             </div>
             <div className='text-center bg-slate-200 flex justify-center gap-2 items-center'>
                 <h4>{consumption} kwh</h4>
