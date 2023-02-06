@@ -3,11 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const solarSlice = createSlice({
     name: 'solarSlice',
     initialState: {
-        panelNumber: 1000,
+        panelNumber: 667,
         powerGenerated: 0,
         isRunning: false,
         irradiance: 0, 
-        panelWattage: 300,
+        panelWattage: 250,
         batteryCapacity: 0,
         batteryNumber: 0,
     },

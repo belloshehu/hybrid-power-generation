@@ -21,7 +21,7 @@ const SolarSource = () => {
     }
     useEffect(() => {
         fetchData()
-        dispatch(calculatePower(2.4))
+        dispatch(calculatePower(4))
     }, [])
         
     return (
@@ -37,7 +37,7 @@ const SolarSource = () => {
             <div 
                 className='text-center bg-slate-200 flex justify-center gap-2'
             >
-                <h4>{powerGenerated} MW</h4>
+                <h4>{powerGenerated.toFixed(2)} MW</h4>
                 <FiEdit 
                     className='text-primary font-extrabold text-3xl hover:bg-slate-400 rounded-full p-1'
                 />

@@ -1,5 +1,5 @@
 import { createSlice, CreateSliceOptions } from "@reduxjs/toolkit";
-import {load as consumption} from '../../data/power'
+import {load as consumption, load} from '../../data/power'
 
 
 const loadSlice = createSlice({
@@ -75,16 +75,18 @@ const loadSlice = createSlice({
         },
         calculateConnectedTotalLoad: (state) => {
             let total = 0
+
             state.loadItems.forEach(item => {
-                if(item.isConnected === true){
+                if(item.isConnected){
                     total += item.consumption
                 }
             });
+            console.log(total)
             state.totalConnectedLoad = total
         },
         connect: (state, {payload}) => {
             state.loadItems = state.loadItems.map((item) =>{
-                if(item.id === payload.id){
+                if(item.id === payload){
                     return {...item, isConnected: true}
                 }else{
                     return item
@@ -93,7 +95,7 @@ const loadSlice = createSlice({
         }, 
         disconnect: (state, {payload}) => {
             state.loadItems = state.loadItems.map((item) =>{
-                if(item.id === payload.id){
+                if(item.id === payload){
                     return {...item, isConnected: false}
                 }else{
                     return item

@@ -9,6 +9,8 @@ import {
   calculateTotalLoad 
 } from '../../features/load/loadSlice'
 import LineChart from '../../components/LineChart/LineChart'
+import EnergyStorage from '../../components/EnergyStorage/EnergyStorage'
+import { calculatePower } from '../../features/hydroSource/hydroSourceSlice'
 
 
 const Home = () => {
@@ -35,6 +37,7 @@ const Home = () => {
   }, [consumptionWindow])
   
   useEffect(()=>{
+    dispatch(calculatePower())
     let total = hydroSource.powerGenerated + solarSource.powerGenerated
     setTotalGeneratedPower(total)
   }, [])
@@ -44,7 +47,7 @@ const Home = () => {
   }, [solarSource.isRunning, hydroSource.isRunning])
 
   return (
-    <section className='w-full flex flex-col gap-10'>
+    <section className='w-full flex flex-col gap-2'>
       <section>
         <div 
           className='bg-primary p-1 my-2 flex gap-2 items-center rounded-md justify-center'
@@ -52,7 +55,7 @@ const Home = () => {
           <span 
             className='text-slate-900 border-r-2 border-secondary pr-2'
           >
-            Total available: {totalGeneratedPower} MW
+            Total available: {totalGeneratedPower.toFixed(2)} MW
           </span>
           <span 
             className='text-slate-100'
@@ -60,9 +63,10 @@ const Home = () => {
             Total Connected: {totalConnectedPower} MW
           </span>
         </div>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-2 w-full'>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-2 w-full'>
           <HydroSource />
           <SolarSource />
+          <EnergyStorage />
         </div>
       </section>
 

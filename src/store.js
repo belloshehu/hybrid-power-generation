@@ -4,6 +4,7 @@ import hydroSourceSlice from "./features/hydroSource/hydroSourceSlice";
 import solarSourceSlice from "./features/solarSource/solarSourceSlice";
 import loadSlice from "./features/load/loadSlice";
 import controlPanelSlice from "./features/controlPanel/controlPanelSlice";
+import energyStorageSlice from "./features/energyStorage/energyStorageSlice";
 
 export const store = configureStore(
  {
@@ -12,7 +13,8 @@ export const store = configureStore(
         hydroSource: hydroSourceSlice,
         modal: {},
         load: loadSlice,
-        controlPanel: controlPanelSlice
+        controlPanel: controlPanelSlice,
+        energyStorage: energyStorageSlice
     }
  }
 )

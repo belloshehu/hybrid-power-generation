@@ -11,20 +11,21 @@ let count = 0
 const Load = ({id, name, category, capacity,consumption, isConnected}) => {
     const dispatch = useDispatch()
     const {consumptionWindow} = useSelector(store => store.load)
+    
     const handleDisconnect = () =>{
+        dispatch(disconnect(id))
         dispatch(calculateConnectedTotalLoad())
-        dispatch(disconnect({id}))
     }
 
     const handleConnect = () =>{
+        dispatch(connect(id))
         dispatch(calculateConnectedTotalLoad())
-        dispatch(connect({id}))
         dispatch(updateLoadsConsumption())
     }
       
     useEffect(()=>{
 
-    }, [consumptionWindow])
+    }, [consumptionWindow, isConnected])
     return (
         <article 
         className='bg-white p-5 rounded-md shadow-md shadow-slate-500 text-black hover:scale-105 slow-transition'

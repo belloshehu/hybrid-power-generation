@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react'
 import { FiEdit } from 'react-icons/fi'
-import { GiGears,} from 'react-icons/gi'
 import { TbSettings } from 'react-icons/tb'
 import { useDispatch, useSelector } from 'react-redux'
 import { 
@@ -44,7 +43,7 @@ const HydroSource = () => {
                     {head}m head
                 </div>
                 <div className='p-1 bg-slate-400'>
-                    {flowVolume}ls<sup>-1</sup> flow volume
+                    {flowVolume}ls<sup>-1</sup>
                 </div>
             </div>
             {
