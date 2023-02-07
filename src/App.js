@@ -7,6 +7,7 @@ import Home from './pages/Home/Home';
 import Analysis from './pages/Home/Analysis';
 import Modal from './components/Modal/Modal';
 import { useSelector } from 'react-redux';
+import Source from './pages/Home/Source';
 
 function App() {
   const {isOpen} = useSelector(store => store.modal)
@@ -16,6 +17,7 @@ function App() {
       <Main>
         <Routes>
           <Route path='/' element={<Home />}/>
+          <Route path='/sources' element={<Source />}/>
           <Route path='/analysis' element={<Analysis />}/>
           <Route path='*' element={<h2>Page not found!</h2>}/>
         </Routes>

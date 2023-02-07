@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import './Sidebar.css'
 import {FaHome, FaChartLine, FaTimes, FaBookOpen} from 'react-icons/fa'
-import {GiPowerGenerator, GiElectric} from 'react-icons/gi'
+import {GiElectric} from 'react-icons/gi'
 import {ImPower} from 'react-icons/im'
-import {TbDevices} from 'react-icons/tb'
+import {TbDevices, TbSettings} from 'react-icons/tb'
 import NavItem from '../NavItem/NavItem'
 import ConsumptionWindowControl from '../ConsumptionWindowControl/ConsumptionWindowControl'
-import LineChart from '../LineChart/LineChart'
 
 const navItems = [
     {
@@ -23,6 +22,11 @@ const navItems = [
         text: 'Loads',
         icon: <TbDevices />,
         path: 'loads'
+    },
+    {
+        text: 'Configurations',
+        icon: <TbSettings />,
+        path: '/configurations'
     },
     {
         text: 'Analysis',
