@@ -5,13 +5,14 @@ import solarSourceSlice from "./features/solarSource/solarSourceSlice";
 import loadSlice from "./features/load/loadSlice";
 import controlPanelSlice from "./features/controlPanel/controlPanelSlice";
 import energyStorageSlice from "./features/energyStorage/energyStorageSlice";
+import modalSlice from "./features/modal/modalSlice";
 
 export const store = configureStore(
  {
     reducer: {
         solarSource: solarSourceSlice,
         hydroSource: hydroSourceSlice,
-        modal: {},
+        modal: modalSlice,
         load: loadSlice,
         controlPanel: controlPanelSlice,
         energyStorage: energyStorageSlice

@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import { FiEdit } from 'react-icons/fi'
 import { TbSettings } from 'react-icons/tb'
 import { useDispatch, useSelector } from 'react-redux'
+import { calculateConnectedGeneratedPower, controlLoads } from '../../features/controlPanel/controlPanelSlice'
 import { 
     start, 
     stop, 
@@ -14,12 +15,16 @@ const HydroSource = () => {
     const {powerGenerated, head, flowVolume, isRunning} = useSelector(store => store.hydroSource)
     const dispatch = useDispatch()
 
-
     useEffect(() => {
-     dispatch(calculateFlowVolume())
-     dispatch(calculatePower())
-    }, [])
+        dispatch(calculateFlowVolume())
+        dispatch(calculatePower())
+    }, [isRunning])
     
+    const handleStopClick = () =>{
+        dispatch(stop())
+        dispatch(controlLoads(0))
+    }
+
     return (
         <article 
             className='bg-white p-5 rounded-md shadow-md shadow-slate-500 text-black hover:scale-105 slow-transition'
@@ -50,7 +55,7 @@ const HydroSource = () => {
                 isRunning? (
                     <button 
                         className='bg-primary p-2 rounded-full text-secondary w-full mt-5 mx-auto'
-                        onClick={()=>dispatch(stop())}
+                        onClick={handleStopClick}
                     >
                         stop
                     </button>

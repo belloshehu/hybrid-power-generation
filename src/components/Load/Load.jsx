@@ -6,6 +6,7 @@ import {
     updateLoadsConsumption,
 } from '../../features/load/loadSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import { calculateConnectedGeneratedPower, controlLoads, selectLoads } from '../../features/controlPanel/controlPanelSlice'
 let count = 0
 
 const Load = ({id, name, category, capacity,consumption, isConnected}) => {
@@ -21,6 +22,8 @@ const Load = ({id, name, category, capacity,consumption, isConnected}) => {
         dispatch(connect(id))
         dispatch(calculateConnectedTotalLoad())
         dispatch(updateLoadsConsumption())
+        dispatch(calculateConnectedGeneratedPower())
+        dispatch(controlLoads(id))
     }
       
     useEffect(()=>{
