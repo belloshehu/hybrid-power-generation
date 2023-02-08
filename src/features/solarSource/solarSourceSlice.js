@@ -17,6 +17,7 @@ const solarSlice = createSlice({
             state.panelWattage = parseFloat(payload.wattage)
             state.irradiance = parseFloat(payload.irradiance)
             state.panelNumber = parseFloat(payload.pannels)
+            state.powerGenerated = state.panelWattage * payload.irradiance * state.panelNumber * 0.75 / 1000000; 
         },
         calculatePower: (state, action) => {
             if(action.payload){

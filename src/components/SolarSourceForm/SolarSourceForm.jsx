@@ -7,16 +7,16 @@ import Form from '../Form/Form'
 
 const SolarSourceForm = ({title}) => {
     const inputs = [
-        {
+        // {
            
-            name: 'power',
-            label: 'Generated power (in Mega watt)',
-            type: 'number',
-            step: 'any',
-            id: 'power',
-            required: true,
-            errorMessage: 'Power should be more than 0'
-        },
+        //     name: 'power',
+        //     label: 'Generated power (in Mega watt)',
+        //     type: 'number',
+        //     step: 'any',
+        //     id: 'power',
+        //     required: true,
+        //     errorMessage: 'Power should be more than 0'
+        // },
         {
            
             name: 'pannels',
@@ -50,14 +50,12 @@ const SolarSourceForm = ({title}) => {
     ]
     const {
         panelNumber,
-        powerGenerated,
         irradiance, 
         panelWattage
     } = useSelector(store => store.solarSource)
 
     const initialValues = {
         pannels: panelNumber,
-        power: powerGenerated,
         irradiance, 
         wattage: panelWattage
     }
