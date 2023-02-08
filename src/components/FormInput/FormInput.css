@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .input{
+        @apply flex flex-col gap-1 w-full
+    }
+    .input input{
+        @apply rounded-md p-1 border-2 outline-none
+    } 
+}

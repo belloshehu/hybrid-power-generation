@@ -11,6 +11,11 @@ const hydroSourceSlice = createSlice({
         isRunning: false,
     },
     reducers: {
+        setParameters: (state, action) =>{
+            state.powerGenerated = parseFloat(action.payload.power)
+            state.head = parseFloat(action.payload.head)
+            state.flowVolume = parseFloat(action.payload.flow)
+        },
         calculateFlowVolume: (state) => {
             if(state.powerGenerated === 0){
                 state.flowVolume = state.crossSectionalArea * state.waterSpeed;
@@ -28,5 +33,11 @@ const hydroSourceSlice = createSlice({
     }
 })
 
-export const {calculateFlowVolume, calculatePower, start, stop} = hydroSourceSlice.actions
+export const {
+    calculateFlowVolume, 
+    calculatePower, 
+    start, 
+    stop,
+    setParameters
+} = hydroSourceSlice.actions
 export default hydroSourceSlice.reducer
