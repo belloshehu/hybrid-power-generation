@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+    .list-item {
+        @apply flex justify-between items-center bg-slate-50 p-2
+    }
+}

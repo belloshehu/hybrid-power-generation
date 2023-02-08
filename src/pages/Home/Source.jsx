@@ -1,4 +1,6 @@
 import React, {useState} from 'react'
+import EnergyStorageDetails from '../../components/EnergyStorageDetails/EnergyStorageDetails'
+import EnergyStorageForm from '../../components/EnergyStorageForm/EnergyStorageForm'
 import HydroSourceDetails from '../../components/HydroSourceDetails/HydroSourceDetails'
 import HydroSourceForm from '../../components/HydroSourceForm/HydroSourceForm'
 import SolarSourceDetails from '../../components/SolarSourceDetails/SolarSourceDetails'
@@ -40,14 +42,27 @@ const Source = () => {
                         />
                         <HydroSourceDetails />
                     </>
-                ): (
+                ): null
+            }
+            {
+                activeSource === 'solar'? (
                     <>
                         <SolarSourceForm
                             title={activeSource}
                         />
                         <SolarSourceDetails/>
                     </>
-                )
+                ): null
+            }
+            {
+                activeSource === 'storage'? (
+                    <>
+                        <EnergyStorageForm
+                            title={activeSource}
+                        />
+                        <EnergyStorageDetails/>
+                    </>
+                ): null
             }
         </div>
       </section>

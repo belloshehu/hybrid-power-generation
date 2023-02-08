@@ -18,16 +18,11 @@ const navItems = [
         icon: <ImPower />,
         path: '/sources'
     },
-    {
-        text: 'Loads',
-        icon: <TbDevices />,
-        path: 'loads'
-    },
-    {
-        text: 'Configurations',
-        icon: <TbSettings />,
-        path: '/configurations'
-    },
+    // {
+    //     text: 'Loads',
+    //     icon: <TbDevices />,
+    //     path: 'loads'
+    // },
     {
         text: 'Analysis',
         icon: <FaChartLine />,

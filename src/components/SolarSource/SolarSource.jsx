@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react'
 import { calculatePower, start, stop } from '../../features/solarSource/solarSourceSlice'
+import { controlLoads } from '../../features/controlPanel/controlPanelSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import { TbSettings } from 'react-icons/tb'
 import { FiEdit } from 'react-icons/fi'
@@ -24,6 +25,11 @@ const SolarSource = () => {
         dispatch(calculatePower(4))
     }, [])
         
+    const handleStopClick = () =>{
+        dispatch(stop())
+        dispatch(controlLoads(0))
+    }
+
     return (
         <article 
             className='bg-white p-5 rounded-md shadow-md shadow-slate-500 text-black hover:scale-105 slow-transition'
@@ -54,7 +60,7 @@ const SolarSource = () => {
                 isRunning? (
                     <button 
                         className='bg-primary p-2 rounded-full text-secondary w-full mt-5 mx-auto'
-                        onClick={()=>dispatch(stop())}
+                        onClick={handleStopClick}
                     >
                         stop
                     </button>
