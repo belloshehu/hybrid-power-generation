@@ -1,15 +1,15 @@
 import React from 'react'
 
-const InputError = ({errorMessage, inputName, focusedInputName}) => {
+const InputErrorMessage = ({showMessage, errorMessage, inputName, focusedInputName}) => {
   return (
     <span 
         className={`text-sm text-red-500 
             ${inputName === focusedInputName ? 'visible': 'hidden'}`
         }
     >
-        {errorMessage}
+        {errorMessage} 
     </span>
 )
 }
 
-export default InputError
+export default InputErrorMessage

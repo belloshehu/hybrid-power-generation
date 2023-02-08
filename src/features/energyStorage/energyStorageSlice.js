@@ -31,6 +31,11 @@ const energyStorage = createSlice({
     },
 
     reducers:{
+        setParameters: (state, {payload}) => {
+            state.numberOfBatteries = parseFloat(payload.batteries)
+            state.batteryAh = parseFloat(payload.batteryAh)
+            state.batteryVoltage = parseFloat(payload.batteryVoltage)
+        },
         updateDOD: (state, action) => {
             const percentageAh = action.payload * 100 / state.batteryAh
             console.log(percentageAh, action.payload, '%')
@@ -77,6 +82,7 @@ export const {
     connectEnergyStorge,
     calculateSOD,
     updateDOD,
+    setParameters
 } = energyStorage.actions
 
 export default energyStorage.reducer

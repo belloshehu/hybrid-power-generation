@@ -12,6 +12,12 @@ const solarSlice = createSlice({
         batteryNumber: 0,
     },
     reducers: {
+        setParameters: (state, {payload}) => {
+            state.powerGenerated = parseFloat(payload.power)
+            state.panelWattage = parseFloat(payload.wattage)
+            state.irradiance = parseFloat(payload.irradiance)
+            state.panelNumber = parseFloat(payload.pannels)
+        },
         calculatePower: (state, action) => {
             if(action.payload){
                 state.powerGenerated = state.panelWattage * action.payload * state.panelNumber * 0.75 / 1000000; 
@@ -28,5 +34,5 @@ const solarSlice = createSlice({
     }
 })
 
-export const {calculatePower, stop, start} = solarSlice.actions
+export const {calculatePower, stop, start, setParameters} = solarSlice.actions
 export default solarSlice.reducer
