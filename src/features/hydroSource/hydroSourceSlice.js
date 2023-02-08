@@ -7,7 +7,7 @@ const hydroSourceSlice = createSlice({
         head: 16,
         waterSpeed: 100,
         flowVolume: 25000,
-        powerGenerated: 2000000,
+        powerGenerated: 2,
         isRunning: false,
     },
     reducers: {

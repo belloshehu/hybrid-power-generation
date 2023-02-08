@@ -40,7 +40,6 @@ const ConsumptionWindowControl = () => {
             timer = setInterval(() => {
                 dispatch(updateConsumptionWindow(formatHour(count)))
                 dispatch(updateLoadsConsumption())
-
                 if(count >= 23){
                     count = 0
                 }else{

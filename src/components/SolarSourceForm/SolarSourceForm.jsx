@@ -1,9 +1,9 @@
-import React, {useState} from 'react'
-import { useDispatch } from 'react-redux'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import './SolarSourceForm.css'
 import { setParameters } from '../../features/solarSource/solarSourceSlice'
-import { openModal } from '../../features/modal/modalSlice'
-import FormInput from '../FormInput/FormInput'
+import Form from '../Form/Form'
+
 
 const SolarSourceForm = ({title}) => {
     const inputs = [
@@ -48,88 +48,26 @@ const SolarSourceForm = ({title}) => {
             errorMessage: 'Irradiance should be more than 0'
         },
     ]
-    const dispatch = useDispatch()
+    const {
+        panelNumber,
+        powerGenerated,
+        irradiance, 
+        panelWattage
+    } = useSelector(store => store.solarSource)
 
     const initialValues = {
-        power: 0, 
-        pannels: 0,
-        irradiance: 0,
-        wattage: 0,
-
+        pannels: panelNumber,
+        power: powerGenerated,
+        irradiance, 
+        wattage: panelWattage
     }
-
-    const [values, setValues] = useState(initialValues)
-
-    const handleDiscardChange = (e) =>{
-        setValues(initialValues)
-    }
-
-    const isValidForm = () =>{
-        return (
-            values.power > 0  && 
-            values.pannels > 0 && 
-            values.wattage > 0 && 
-            values.irradiance
-        )
-    }
-
-    
-    const handleSubmit = (e) => {
-        e.preventDefault(true)
-        
-        if(!isValidForm()){
-            dispatch(openModal(
-                {
-                    title: 'Error', 
-                    body: 'Setting parameters failed. Ensure vaild values are entered'
-                })
-            )
-        }else{
-            dispatch(setParameters(values))
-            dispatch(openModal({title: 'Success', body: 'Parameters successfully set'}))
-        }
-    }
-
-    const handleChange = (e) => {
-        setValues( prev =>{
-            return {...prev, [e.target.name]: e.target.value}
-        })
-    }
-
     return (
-        <div className='bg-slate-100 rounded-md p-5 text-slate-800'>
-            <h3 className='text-xl font-bold text-center border-b-2 mb-5'>{title}</h3>
-            <form 
-                className='flex flex-col justify-center gap-2'
-                onSubmit={handleSubmit}
-            >
-                {
-                    inputs.map(input => 
-                        <FormInput 
-                            key={input.name}
-                            inputProps={input}
-                            value={values[input.name]}
-                            handleChange={handleChange}
-                        />    
-                    )
-                }
-                <div 
-                    className='flex justify-between my-2'
-                    >
-                    <input 
-                        type='submit' 
-                        value='Save'
-                        className='bg-primary rounded-md p-2 px-5 text-white'
-                    />
-                    <input
-                        type='reset' 
-                        value='discard changes'
-                        className='rounded-md p-2 px-5 text-primary bg-slate-200'
-                    />
-                    
-                </div>
-            </form>
-        </div>
+        <Form 
+            initialValues={initialValues}
+            title={title}
+            inputs={inputs}
+            setParameters={setParameters}
+        />
     )
 }
 
