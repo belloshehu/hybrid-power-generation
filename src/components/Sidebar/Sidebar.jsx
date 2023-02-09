@@ -6,6 +6,7 @@ import {ImPower} from 'react-icons/im'
 import {TbDevices, TbSettings} from 'react-icons/tb'
 import NavItem from '../NavItem/NavItem'
 import ConsumptionWindowControl from '../ConsumptionWindowControl/ConsumptionWindowControl'
+import Location from '../Location/Location'
 
 const navItems = [
     {
@@ -59,6 +60,7 @@ const Sidebar = () => {
             >
                 {navItems.map(item => <NavItem {...item} key={item.text} /> )}
             </ul>
+            <Location />
             <ConsumptionWindowControl />
         </aside>
     )

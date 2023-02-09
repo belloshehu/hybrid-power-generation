@@ -1,11 +1,15 @@
 import React, {useEffect} from 'react'
-import { calculatePower, start, stop } from '../../features/solarSource/solarSourceSlice'
+import { calculatePower, start, stop, updateIrradiance } from '../../features/solarSource/solarSourceSlice'
 import { controlLoads } from '../../features/controlPanel/controlPanelSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import { TbSettings } from 'react-icons/tb'
 import { FiEdit } from 'react-icons/fi'
+import { setLocationDetails } from '../../features/location/locationSlice'
 
 const SolarSource = () => {
+    const longitude = 6.1816
+    const latitude = 6.5303
+    
     const dispatch = useDispatch()
     const {
         powerGenerated, 
@@ -15,15 +19,34 @@ const SolarSource = () => {
     } = useSelector(store => store.solarSource)
 
     const fetchData = async () =>{
-        const res =  await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${'5.95058'}&lon=${'5.681'}&appid=${'8825d3ca67709456f37a2234758c2c66'}`)
-        .then(res => res.json())
-        .then(data => console.log(data))
-        .catch(err => {console.log(err)})
+        
+        try {
+            fetch(`https://api.weatherbit.io/v2.0/current?lat=${latitude}&lon=${longitude}&key=8486c6ef020d4d11b5852d6c7b172a35&include=hourly`)
+            .then(res => res.json())
+            .then((jsonData)=>{
+                const data = jsonData.data[0]
+                dispatch(setLocationDetails({
+                    city_name: data.city_name,
+                    state_code: data.state_code,
+                    country_code: data.country_code
+                }))
+                dispatch(updateIrradiance(data.ghi))
+                dispatch(calculatePower())
+                console.log( data.city_name, data.state_code,data.country_code)
+            })
+        } catch (error) {
+            console.log(error)
+        }
+
     }
     useEffect(() => {
         fetchData()
-        dispatch(calculatePower(4))
+        dispatch(calculatePower())
     }, [])
+
+    useEffect(()=>{
+        dispatch(calculatePower())
+    }, [irradiance])
         
     const handleStopClick = () =>{
         dispatch(stop())
@@ -50,7 +73,7 @@ const SolarSource = () => {
             </div>
             <div className='grid grid-cols-2 bg-slate-200 gap-2 p-1 text-center text-primary'>
                 <div className='p-1 bg-slate-400'>
-                    {irradiance} KWh/m<sup>2</sup>
+                    {irradiance} W/m<sup>2</sup>
                 </div>
                 <div className='p-1 bg-slate-400'>
                     {panelNumber} pannels

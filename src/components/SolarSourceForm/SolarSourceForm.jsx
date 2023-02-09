@@ -7,40 +7,42 @@ import Form from '../Form/Form'
 
 const SolarSourceForm = ({title}) => {
     const inputs = [
-        // {
-           
-        //     name: 'power',
-        //     label: 'Generated power (in Mega watt)',
-        //     type: 'number',
-        //     step: 'any',
-        //     id: 'power',
-        //     required: true,
-        //     errorMessage: 'Power should be more than 0'
-        // },
         {
            
-            name: 'pannels',
+            name: 'area',
+            label: 'Panel area (meter square)',
+            type: 'number',
+            step: 'any',
+            id: 'area',
+            required: true,
+            errorMessage: 'Panel area should be more than 0'
+        },
+        {
+           
+            name: 'panels',
             label: 'Number of pannels',
             type: 'number',
             step: 'any',
-            id: 'pannels',
+            id: 'panels',
             required: true,
             errorMessage: 'Pannels should be more than 0'
         },
         {
            
-            name: 'wattage',
-            label: 'Pannel wattage (watts)',
+            name: 'yield',
+            label: 'Panel efficiency/yeild (percentage)',
             type: 'number',
             step: 'any',
-            id: 'wattage',
+            id: 'yield',
+            min: 0,
+            max: 50,
             required: true,
-            errorMessage: 'Pannel wattage should be more than 0'
+            errorMessage: 'Pannel efficiency should be between 0 and 1'
         },
         {
            
             name: 'irradiance',
-            label: 'Irradiance (kwh/m square)',
+            label: 'Irradiance (w/m square)',
             type: 'number',
             step: 'any',
             id: 'irradiance',
@@ -51,13 +53,15 @@ const SolarSourceForm = ({title}) => {
     const {
         panelNumber,
         irradiance, 
-        panelWattage
+        panelArea, 
+        panelYield
     } = useSelector(store => store.solarSource)
 
     const initialValues = {
-        pannels: panelNumber,
-        irradiance, 
-        wattage: panelWattage
+        panels: panelNumber,
+        irradiance,  
+        area: panelArea,
+        yield: panelYield
     }
     return (
         <Form 

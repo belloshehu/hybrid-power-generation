@@ -6,34 +6,38 @@ const solarSlice = createSlice({
         panelNumber: 667,
         powerGenerated: 0,
         isRunning: false,
-        irradiance: 0, 
+        irradiance: 900, 
         panelWattage: 250,
-        batteryCapacity: 0,
-        batteryNumber: 0,
+        panelArea: 2,
+        panelYield: 15,
+        performanceRatio: 0.75,
     },
     reducers: {
         setParameters: (state, {payload}) => {
-            state.powerGenerated = parseFloat(payload.power)
-            state.panelWattage = parseFloat(payload.wattage)
             state.irradiance = parseFloat(payload.irradiance)
-            state.panelNumber = parseFloat(payload.pannels)
-            state.powerGenerated = state.panelWattage * payload.irradiance * state.panelNumber * 0.75 / 1000000; 
+            state.panelNumber = parseFloat(payload.panels)
+            state.panelYield = parseFloat(payload.yield)
+            state.panelArea = parseFloat(payload.area)
+            state.powerGenerated = state.panelArea * state.panelYield * state.irradiance * state.panelNumber * state.performanceRatio / 1000000 / 100; 
         },
-        calculatePower: (state, action) => {
-            if(action.payload){
-                state.powerGenerated = state.panelWattage * action.payload * state.panelNumber * 0.75 / 1000000; 
-            }else{
-                state.powerGenerated = state.panelWattage * state.irradiance * state.panelNumber * 0.75 / 1000000; 
-            }
+        calculatePower: (state) => {
+            state.powerGenerated = state.panelArea * state.panelYield * state.irradiance * state.panelNumber * state.performanceRatio / 1000000 / 100; 
+            // if(action.payload){
+            //     state.powerGenerated = state.panelArea * state.panelYield * action.payload * state.panelNumber * state.performanceRatio / 1000000; 
+            // }else{
+            // }
         }, 
         start: (state) => {
             state.isRunning = true
         }, 
         stop: (state) => {
             state.isRunning = false
+        },
+        updateIrradiance: (state, action) =>{
+            state.irradiance = action.payload
         }
     }
 })
 
-export const {calculatePower, stop, start, setParameters} = solarSlice.actions
+export const {calculatePower, stop, start, setParameters, updateIrradiance} = solarSlice.actions
 export default solarSlice.reducer
